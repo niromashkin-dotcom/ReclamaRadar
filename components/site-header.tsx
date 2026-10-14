@@ -34,9 +34,24 @@ export async function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           {session ? (
-            <SignOutButton />
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 text-sm">
+                <span className="font-medium text-foreground">
+                  {session.user.name || session.user.email.split('@')[0]}
+                </span>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
+                  >
+                    Админ
+                  </Link>
+                )}
+              </div>
+              <SignOutButton />
+            </div>
           ) : (
             <>
               <ButtonLink href="/sign-in" variant="ghost" size="lg" className="px-4">
